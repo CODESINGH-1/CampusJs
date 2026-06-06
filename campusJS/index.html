@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>CampusJS - Learn JavaScript</title>
+
+  <link rel="stylesheet" href="style.css" />
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+  />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="logo">Campus<span>JS</span></div>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#lessons">Lessons</a>
+      <a href="#quiz">Quiz</a>
+      <a href="#notes">Notes</a>
+    </nav>
+
+    <button id="themeToggle" class="theme-toggle" onclick="toggleTheme()">
+      Light Mode
+    </button>
+  </header>
+
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Learn JavaScript One Step at a Time</h1>
+
+      <p>
+        CampusJS is a simple learning website made for students who want to
+        understand JavaScript from the basics. Start with small topics, practice
+        with examples, solve quizzes, and track your progress as you learn.
+      </p>
+
+      <button onclick="scrollToLessons()">Start Learning</button>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <section class="progress-section">
+      <h2>Your Progress</h2>
+
+      <div class="progress-box">
+        <div class="progress-bar">
+          <div id="progressFill"></div>
+        </div>
+
+        <p id="progressText">0 / 5 lessons completed</p>
+
+        <button class="reset-progress-btn" onclick="resetProgress()">
+          Reset Progress
+        </button>
+      </div>
+    </section>
+
+    <section id="lessons" class="lessons-section">
+      <h2>Lessons</h2>
+
+      <div class="lesson-layout">
+
+        <aside class="lesson-sidebar">
+          <button class="lesson-btn active" onclick="showLesson(0)">
+            Introduction to JavaScript
+          </button>
+
+          <button class="lesson-btn" onclick="showLesson(1)">
+            Data Types in JS
+          </button>
+
+          <button class="lesson-btn" onclick="showLesson(2)">
+            Operators in JS
+          </button>
+
+          <button class="lesson-btn" onclick="showLesson(3)">
+            Operators & Math Functions
+          </button>
+
+          <button class="lesson-btn" onclick="showLesson(4)">
+            Loops & Pattern Printing
+          </button>
+        </aside>
+
+        <section class="lesson-content">
+          <h3 id="lessonTitle"></h3>
+
+          <p id="lessonDescription"></p>
+
+          <div class="theory-box">
+            <h4>Explanation</h4>
+            <p id="lessonTheory"></p>
+          </div>
+
+          <div class="points-box">
+            <h4>Important Points</h4>
+            <ul id="lessonPoints"></ul>
+          </div>
+
+          <div class="usecase-box">
+            <h4>Where You Will Use This</h4>
+            <p id="lessonUseCase"></p>
+          </div>
+
+          <h4>Code Example</h4>
+
+          <pre><code id="lessonCode" class="language-js"></code></pre>
+
+          <h4>Output</h4>
+
+          <div id="lessonOutput" class="output-box"></div>
+
+          <button id="completeBtn" onclick="markCompleted()">
+            Mark as Completed
+          </button>
+        </section>
+
+      </div>
+    </section>
+
+    <section id="quiz" class="quiz-section">
+      <h2>Practice Quiz</h2>
+
+      <div class="quiz-score-box">
+        <p id="scoreText">Score: 0 / 0</p>
+      </div>
+
+      <div id="quizContainer"></div>
+
+      <button onclick="resetQuiz()" class="reset-btn">
+        Reset Quiz
+      </button>
+    </section>
+
+    <section id="notes" class="notes-section">
+      <h2>Your Notes</h2>
+
+      <p class="notes-info">
+        Write down anything you want to remember while learning.
+      </p>
+
+      <textarea id="notesBox" placeholder="Write your notes here..."></textarea>
+
+      <button onclick="saveNotes()">Save Notes</button>
+
+      <p id="notesMessage"></p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>CampusJS | Learn JavaScript with practice</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
