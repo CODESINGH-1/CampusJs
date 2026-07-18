@@ -1,14 +1,22 @@
+/**
+ * CampusJS - Engineering Optimization Stylesheet
+ * Scalable CSS Variables, hardware-tuned transitions, and defensive responsive design layout.
+ */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+/* ==========================================
+ * 1. Global Design Tokens (Theme Variables)
+ * ========================================== */
 :root {
   --bg-main: #0f172a;
   --bg-navbar: #020617;
@@ -29,6 +37,12 @@ html {
   --danger-color: #ef4444;
 
   --hero-bg: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+  
+  /* Semantic Evaluation Colors */
+  --option-correct-bg: #064e3b;
+  --option-correct-border: #10b981;
+  --option-wrong-bg: #4c0519;
+  --option-wrong-border: #f43f5e;
 }
 
 body.light-theme {
@@ -51,15 +65,25 @@ body.light-theme {
   --danger-color: #dc2626;
 
   --hero-bg: linear-gradient(135deg, #ffffff, #e0f2fe, #dbeafe);
+  
+  /* Light Theme Evaluation Inversions */
+  --option-correct-bg: #d1fae5;
+  --option-correct-border: #10b981;
+  --option-wrong-bg: #ffe4e6;
+  --option-wrong-border: #f43f5e;
 }
 
 body {
   background-color: var(--bg-main);
   color: var(--text-main);
   line-height: 1.6;
-  transition: 0.3s;
+  /* GPU Friendly Specific Property Transitions */
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 
+/* ==========================================
+ * 2. Layout Structure Components
+ * ========================================== */
 .navbar {
   width: 100%;
   padding: 18px 8%;
@@ -75,8 +99,9 @@ body {
 
 .logo {
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 700;
   color: var(--text-heading);
+  letter-spacing: -0.5px;
 }
 
 .logo span {
@@ -88,45 +113,18 @@ body {
   text-decoration: none;
   margin-left: 25px;
   font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .navbar nav a:hover {
   color: var(--accent-color);
 }
 
-.theme-toggle {
-  padding: 10px 16px;
-  font-size: 14px;
-}
-
-.hero {
-  min-height: 85vh;
-  display: flex;
-  align-items: center;
-  padding: 60px 8%;
-  background: var(--hero-bg);
-}
-
-.hero-content {
-  max-width: 780px;
-}
-
-.hero h1 {
-  font-size: 54px;
-  margin-bottom: 20px;
-  color: var(--text-heading);
-  line-height: 1.1;
-}
-
-.hero p {
-  font-size: 18px;
-  color: var(--text-muted);
-  margin-bottom: 30px;
-}
-
 .container {
   width: 85%;
-  margin: auto;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 section {
@@ -137,28 +135,68 @@ h2 {
   font-size: 32px;
   margin-bottom: 25px;
   color: var(--text-heading);
+  letter-spacing: -0.5px;
 }
 
+/* ==========================================
+ * 3. Base Input Elements (Buttons & Forms)
+ * ========================================== */
 button {
   background-color: var(--bg-button);
   color: #ffffff;
-  border: none;
+  border: 1px solid transparent;
   padding: 12px 22px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  transition: 0.3s;
+  font-size: 14px;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+body.light-theme button {
+  /* Fix text contrast on light-theme buttons */
+  color: #ffffff;
 }
 
 button:hover {
   background-color: var(--bg-button-hover);
 }
 
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.8;
+button:active {
+  transform: scale(0.98);
 }
 
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+  transform: none !important;
+}
+
+textarea {
+  width: 100%;
+  height: 180px;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-inner);
+  color: var(--text-main);
+  resize: vertical;
+  font-size: 16px;
+  margin-bottom: 15px;
+  transition: border-color 0.2s ease;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+/* ==========================================
+ * 4. Micro-Feature Framework Components
+ * ========================================== */
+
+/* --- Progress Card --- */
 .progress-box {
   background-color: var(--bg-card);
   padding: 25px;
@@ -167,7 +205,7 @@ button:disabled {
 }
 
 .progress-bar {
-  height: 16px;
+  height: 14px;
   width: 100%;
   background-color: var(--bg-sidebar-btn);
   border-radius: 20px;
@@ -179,12 +217,13 @@ button:disabled {
   height: 100%;
   width: 0%;
   background-color: var(--success-color);
-  transition: width 0.4s ease;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #progressText {
   margin-bottom: 15px;
   color: var(--text-muted);
+  font-size: 14px;
 }
 
 .reset-progress-btn {
@@ -195,10 +234,12 @@ button:disabled {
   background-color: #b91c1c;
 }
 
+/* --- Core Grid Layout Engine --- */
 .lesson-layout {
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 25px;
+  align-items: start;
 }
 
 .lesson-sidebar {
@@ -206,7 +247,6 @@ button:disabled {
   padding: 20px;
   border-radius: 12px;
   border: 1px solid var(--border-color);
-  height: fit-content;
   position: sticky;
   top: 90px;
 }
@@ -217,14 +257,17 @@ button:disabled {
   color: var(--text-main);
   margin-bottom: 12px;
   text-align: left;
+  border: 1px solid var(--border-color);
 }
 
 .lesson-btn:hover,
 .lesson-btn.active {
   background-color: var(--accent-color);
+  border-color: var(--accent-color);
   color: #ffffff;
 }
 
+/* --- Main Content Layout --- */
 .lesson-content {
   background-color: var(--bg-card);
   padding: 30px;
@@ -236,6 +279,7 @@ button:disabled {
   font-size: 30px;
   color: var(--accent-color);
   margin-bottom: 15px;
+  letter-spacing: -0.5px;
 }
 
 .lesson-content h4 {
@@ -277,24 +321,23 @@ button:disabled {
 
 pre {
   border-radius: 10px;
-  overflow-x: auto;
-  font-size: 15px;
+  margin: 15px 0;
 }
 
 .output-box {
   background-color: var(--bg-inner);
   border: 1px solid var(--border-color);
-  padding: 15px;
+  padding: 18px;
   border-radius: 8px;
   color: var(--success-color);
   margin-bottom: 20px;
-  white-space: pre-line;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
-#completeBtn {
-  margin-top: 15px;
-}
-
+/* --- Diagnostic Quiz Panels --- */
 .quiz-section {
   background-color: var(--bg-card);
   padding: 30px;
@@ -347,27 +390,56 @@ pre {
   margin-bottom: 10px;
   text-align: left;
   cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
 }
 
-.option:hover {
+.option:hover:not(:disabled) {
   background-color: var(--accent-color);
   color: #ffffff;
 }
 
-.correct {
-  background-color: #064e3b !important;
-  border-color: #10b981 !important;
-  color: #ffffff !important;
+/* Strict Functional Context Classes */
+.option.correct {
+  background-color: var(--option-correct-bg) !important;
+  border-color: var(--option-correct-border) !important;
+  color: var(--success-color) !important;
+  font-weight: 600;
 }
 
-.wrong {
-  background-color: #4c0519 !important;
-  border-color: #f43f5e !important;
-  color: #ffffff !important;
+.option.wrong {
+  background-color: var(--option-wrong-bg) !important;
+  border-color: var(--option-wrong-border) !important;
+  color: var(--danger-color) !important;
+  font-weight: 600;
 }
 
-.reset-btn {
-  margin-top: 15px;
+/* ==========================================
+ * 5. Layout Base Geometry (Hero & Footer)
+ * ========================================== */
+.hero {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  padding: 60px 8%;
+  background: var(--hero-bg);
+}
+
+.hero-content {
+  max-width: 780px;
+}
+
+.hero h1 {
+  font-size: 54px;
+  margin-bottom: 20px;
+  color: var(--text-heading);
+  letter-spacing: -1.5px;
+  line-height: 1.1;
+}
+
+.hero p {
+  font-size: 18px;
+  color: var(--text-muted);
+  margin-bottom: 30px;
 }
 
 .notes-section {
@@ -380,43 +452,27 @@ pre {
 .notes-info {
   color: var(--text-soft);
   margin-bottom: 15px;
-}
-
-textarea {
-  width: 100%;
-  height: 180px;
-  padding: 15px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-inner);
-  color: var(--text-main);
-  resize: vertical;
-  font-size: 16px;
-  margin-bottom: 15px;
-}
-
-textarea:focus {
-  outline: none;
-  border-color: var(--accent-color);
-}
-
-#notesMessage {
-  color: var(--success-color);
-  margin-top: 12px;
+  font-size: 14px;
 }
 
 footer {
   text-align: center;
-  padding: 25px;
+  padding: 30px;
   background-color: var(--bg-navbar);
   color: var(--text-soft);
   border-top: 1px solid var(--border-color);
+  font-size: 14px;
 }
 
+/* ==========================================
+ * 6. Responsive Media Adaptations
+ * ========================================== */
 @media (max-width: 950px) {
   .navbar {
-    flex-wrap: wrap;
-    gap: 15px;
+    padding: 18px 4%;
+  }
+  .hero {
+    padding: 60px 4%;
   }
 }
 
@@ -431,15 +487,25 @@ footer {
 
   .hero h1 {
     font-size: 38px;
+    letter-spacing: -0.5px;
   }
 
   .navbar {
     flex-direction: column;
     gap: 15px;
+    padding: 15px;
+  }
+
+  .navbar nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 
   .navbar nav a {
-    margin: 0 10px;
+    margin: 0;
+    padding: 4px 8px;
   }
 
   .container {
