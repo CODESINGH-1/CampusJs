@@ -1,7 +1,4 @@
-/**
- * CampusJS - Engineering Optimization Stylesheet
- * Scalable CSS Variables, hardware-tuned transitions, and defensive responsive design layout.
- */
+
 
 * {
   margin: 0;
@@ -14,9 +11,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/* ==========================================
- * 1. Global Design Tokens (Theme Variables)
- * ========================================== */
+
 :root {
   --bg-main: #0f172a;
   --bg-navbar: #020617;
