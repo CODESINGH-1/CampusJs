@@ -1,11 +1,4 @@
-/**
- * CampusJS - Production Grade Architecture Engine
- * Scalable state containment, decoupled event binding, and defensive storage structures.
- */
 
-// ==========================================
-// 1. Immutable Data Repositories
-// ==========================================
 const LESSONS_REGISTRY = [
   {
     title: "Introduction to JavaScript",
